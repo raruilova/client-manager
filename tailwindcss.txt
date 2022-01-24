@@ -1,0 +1,11 @@
+npm install autoprefixer postcss tailwindcss 
+
+npx tailwindcss init -p 
+
+en tailwind.config.js ---- 
+ content:["./src/**/*.{html,jsx}"],
+
+en index.css ---- 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
