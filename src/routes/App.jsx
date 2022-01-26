@@ -1,21 +1,20 @@
 import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Login from "../layout/Login";
 import Layout from "../layout/Layout";
 import Home from "../pages/Home";
-import LoginForm from "../pages/LoginForm";
+import NewClient from '../pages/NewClient';
+import EditClient from '../pages/EditClient';
 
 function App() {
-  const [count, setCount] = useState(0);
-
+  // al colocar ese path dentro de <Route></Route> se crea una ruta asi, /clientes/nuevo, si creo otra seria /cliente/ruta
+  //:id rutas dinamicas para pasarle el id y con eso puedo modificar al usuario
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />}>
-          <Route index element={<LoginForm />} />
-        </Route>
         <Route path="/clientes" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="nuevo" element={<NewClient/>}/> 
+          <Route path="editar:id" element={<EditClient/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
