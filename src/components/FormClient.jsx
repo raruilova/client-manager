@@ -2,8 +2,10 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup"; //para validaciones mas potentes
 import { useNavigate } from "react-router-dom";
 import Alert from "./Alert";
+import Spinner from "./Spinner";
 
-const FormClient = () => {
+const FormClient = ({ client, loading }) => {
+  console.log(loading);
   const navigate = useNavigate();
   const newClientShema = Yup.object().shape({
     name: Yup.string()
@@ -24,16 +26,31 @@ const FormClient = () => {
     //los values es como obtengo los datos escritos en los campos
 
     try {
-      const url = "http://localhost:4000/clients";
-      const response = await fetch(url, {
-        method: "POST",
-        body: JSON.stringify(values), //json-server se envia el objeto en string
-        //structura para las peticiones de json-server
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await response.json();
+      let response;
+      if (client.id) {
+        //editanto registro
+        const url = `http://localhost:4000/clients/${client.id}`;
+        response = await fetch(url, {
+          method: "PUT",
+          body: JSON.stringify(values), //json-server se envia el objeto en string
+          //structura para las peticiones de json-server
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+      } else {
+        //nuevo registro
+        const url = "http://localhost:4000/clients";
+        response = await fetch(url, {
+          method: "POST",
+          body: JSON.stringify(values), //json-server se envia el objeto en string
+          //structura para las peticiones de json-server
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+      }
+      await response.json();
       navigate("/clientes");
     } catch (error) {
       console.log(error);
@@ -43,16 +60,17 @@ const FormClient = () => {
   return (
     <div className="bg-white mt-10 px-5 py-10 rounded-md shadow-md md:w-3/4 mx-auto">
       <h1 className="text-gray-600 font-bold text-xl uppdercase text-center">
-        Agregar cliente
+        {client?.name ? "Editar cliente" : "Agregar cliente"}
       </h1>
       <Formik
         initialValues={{
-          name: "",
-          company: "",
-          email: "",
-          phone: "",
-          notes: "",
+          name: client.name || "",
+          company: client.company || "",
+          email: client.email || "",
+          phone: client.phone || "",
+          notes: client.notes || "",
         }}
+        enableReinitialize={true} //para colocar los datos en el formulario para editar
         onSubmit={async (values, { resetForm }) => {
           await handleSubmit(values);
           resetForm();
@@ -63,7 +81,9 @@ const FormClient = () => {
         {({ errors, touched }) => {
           //esos errors lo obtengo del formik, puedo consultar sus datos imprimiedno su data, sin destructurar
 
-          return (
+          return !loading ? (
+            <Spinner />
+          ) : (
             <Form className="mt-10">
               <div className="mb-4">
                 <label htmlFor="name" className="text-gray-800">
@@ -140,7 +160,7 @@ const FormClient = () => {
               </div>
               <input
                 type="submit"
-                value="Agregar cliente"
+                value={client?.name ? "Editar cliente" : "Agregar cliente"}
                 className="mt-5 w-full bg-blue-800 p-3 text-white uppercase font-bold text-lg"
               />
             </Form>
@@ -149,6 +169,11 @@ const FormClient = () => {
       </Formik>
     </div>
   );
+};
+//default props ---- asi evito pasar props a un componente cuando no lo necesito, si esta los paso y si no, los toma de aqui
+FormClient.defaultProps = {
+  client: {},
+  loading: true,
 };
 
 export default FormClient;

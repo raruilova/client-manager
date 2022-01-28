@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { useParams } from "react-router-dom"; //este lee los parametros de mi url, ese id dinamico
+import Spinner from "../components/Spinner";
 import useGetClients from "../hooks/useGetClients";
 
 const VierClient = () => {
@@ -9,8 +9,10 @@ const VierClient = () => {
 
   return (
     <>
-      {loading ? (
-        <p>Cargando</p>
+      {!loading ? (
+        <Spinner />
+      ) : Object.keys(client).length === 0 ? (
+        <p>No hay resultados</p>
       ) : (
         <>
           <h1 className="font-black text-4xl text-blue-900">

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "../layout/Layout";
 import Home from "../pages/Home";
@@ -15,7 +14,7 @@ function App() {
         <Route path="/clientes" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="nuevo" element={<NewClient/>}/> 
-          <Route path="editar:id" element={<EditClient/>}/>
+          <Route path="editar/:id" element={<EditClient/>}/>
           <Route path=":id" element={<ViewClient/>}/>
         </Route>
       </Routes>

@@ -2,7 +2,7 @@
   "clients": [
     {
       "name": "pedro",
-      "company": "asd",
+      "company": "facebook",
       "email": "adsa@gmail.com",
       "phone": "123456",
       "notes": "buen servicio",
@@ -10,7 +10,7 @@
     },
     {
       "name": "pedro",
-      "company": "asd",
+      "company": "google",
       "email": "adsa@gmail.com",
       "phone": "123456",
       "notes": "der",
@@ -23,6 +23,14 @@
       "phone": "3456789",
       "notes": "",
       "id": 3
+    },
+    {
+      "name": "robin",
+      "company": "google",
+      "email": "robin@gmail.com",
+      "phone": "3456789",
+      "notes": "google",
+      "id": 4
     }
   ]
 }

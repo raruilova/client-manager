@@ -5,7 +5,6 @@ const useGetClients = (API) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(async () => {
-    setLoading(!loading);
     try {
       const response = await fetch(API);
       const data = await response.json();
@@ -13,7 +12,11 @@ const useGetClients = (API) => {
     } catch (error) {
       console.log(error);
     }
-    setLoading(false);
+
+    setTimeout(() => {
+      setLoading(!loading);
+    }, 1500);
+    
   }, []);
 
   return [clients, loading];
