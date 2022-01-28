@@ -1,8 +1,10 @@
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup"; //para validaciones mas potentes
+import { useNavigate } from "react-router-dom";
 import Alert from "./Alert";
 
 const FormClient = () => {
+  const navigate = useNavigate();
   const newClientShema = Yup.object().shape({
     name: Yup.string()
       .min(3, "El nombre es muy corto")
@@ -18,8 +20,24 @@ const FormClient = () => {
       .typeError("El número no es válido"), //va ese typeError ya que no me deja escribir el error como los anteriores
   });
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     //los values es como obtengo los datos escritos en los campos
+
+    try {
+      const url = "http://localhost:4000/clients";
+      const response = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify(values), //json-server se envia el objeto en string
+        //structura para las peticiones de json-server
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      navigate("/clientes");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -35,8 +53,9 @@ const FormClient = () => {
           phone: "",
           notes: "",
         }}
-        onSubmit={(values) => {
-          handleSubmit(values);
+        onSubmit={async (values, { resetForm }) => {
+          await handleSubmit(values);
+          resetForm();
         }}
         validationSchema={newClientShema} //lo conecto con yup y lo valida
       >

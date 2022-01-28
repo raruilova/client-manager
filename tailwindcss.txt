@@ -9,3 +9,8 @@ en index.css ----
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+para json-server -- npm i json-server 
+ejecutar el servidor
+npx json-server --watch db.json --port 4000
+ese db.json es la base da datos por asi decirlo, esta en la raiz del proyecto --port le digo el puerto al cual debe ejecutar
