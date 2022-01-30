@@ -19,7 +19,7 @@ const useGetClients = (API) => {
     
   }, []);
 
-  return [clients, loading];
+  return {clients, loading, setClients};
 };
 
 export default useGetClients;

@@ -5,7 +5,7 @@ import Alert from "./Alert";
 import Spinner from "./Spinner";
 
 const FormClient = ({ client, loading }) => {
-  console.log(loading);
+ 
   const navigate = useNavigate();
   const newClientShema = Yup.object().shape({
     name: Yup.string()

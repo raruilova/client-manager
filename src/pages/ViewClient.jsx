@@ -5,58 +5,59 @@ import useGetClients from "../hooks/useGetClients";
 const VierClient = () => {
   const params = useParams();
   const API = `http://localhost:4000/clients/${params.id}`;
-  const [client, loading] = useGetClients(API);
+  const {clients, loading} = useGetClients(API);
+  console.log(clients);
 
   return (
     <>
       {!loading ? (
         <Spinner />
-      ) : Object.keys(client).length === 0 ? (
+      ) : Object.keys(clients).length === 0 ? (
         <p>No hay resultados</p>
       ) : (
         <>
           <h1 className="font-black text-4xl text-blue-900">
-            Ver cliente: {client.name}
+            Ver cliente: {clients.name}
           </h1>
           <p className="mt-3">Información del cliente</p>
-          {client.name && (
+          {clients.name && (
             <p className="text-4xl text-gray-600 mt-10">
               <span className="text-gray-800 uppercase font-bold">
                 Cliente:
               </span>{" "}
-              {client.name}
+              {clients.name}
             </p>
           )}
 
-          {client.email && (
+          {clients.email && (
             <p className="text-2xl text-gray-600 mt-4">
               <span className="text-gray-800 uppercase font-bold">Email:</span>{" "}
-              {client.email}
+              {clients.email}
             </p>
           )}
 
-          {client.phone && (
+          {clients.phone && (
             <p className="text-2xl text-gray-600 mt-4">
               <span className="text-gray-800 uppercase font-bold">
                 Teléfono:
               </span>{" "}
-              {client.phone}
+              {clients.phone}
             </p>
           )}
 
-          {client.company && (
+          {clients.company && (
             <p className="text-2xl text-gray-600 mt-4">
               <span className="text-gray-800 uppercase font-bold">
                 Empresa:
               </span>{" "}
-              {client.company}
+              {clients.company}
             </p>
           )}
 
-          {client.notes && (
+          {clients.notes && (
             <p className="text-2xl text-gray-600 mt-4">
               <span className="text-gray-800 uppercase font-bold">Notas:</span>{" "}
-              {client.notes}
+              {clients.notes}
             </p>
           )}
         </>

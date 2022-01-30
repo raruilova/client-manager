@@ -4,8 +4,24 @@ import useGetClients from "../hooks/useGetClients";
 const Home = () => {
   const API = "http://localhost:4000/clients";
 
-  const [clients] = useGetClients(API);
-  console.log(clients);
+  const {clients, setClients} = useGetClients(API);
+  
+  const handleDelete = async (id) => {
+    const confirmDeleteClient = confirm("¿Estás seguro de eliminar este cliente?"); //devuelve true al pulsar aceptar y false al pulsar cancelar
+
+    if (confirmDeleteClient) {
+      const API = `http://localhost:4000/clients/${id}`;
+      const response = await fetch(API, {
+        method: "DELETE",
+      });
+
+      await response.json();
+
+      //location.reload(); recarga la pagina donde este ubicado 
+      const clientsArray = clients.filter((client) => client.id !== id);
+      setClients(clientsArray);
+    }
+  }
 
   return (
     <>
@@ -22,7 +38,7 @@ const Home = () => {
         </thead>
         <tbody>
           {clients.map((client) => (
-            <Client key={client.id} client={client} />
+            <Client key={client.id} client={client} handleDelete={handleDelete} />
           ))}
         </tbody>
       </table>

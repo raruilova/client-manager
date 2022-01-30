@@ -9,22 +9,6 @@
       "id": 1
     },
     {
-      "name": "pedro",
-      "company": "google",
-      "email": "adsa@gmail.com",
-      "phone": "123456",
-      "notes": "der",
-      "id": 2
-    },
-    {
-      "name": "john",
-      "company": "copy",
-      "email": "jgon@copy.com",
-      "phone": "3456789",
-      "notes": "",
-      "id": 3
-    },
-    {
       "name": "robin",
       "company": "google",
       "email": "robin@gmail.com",
