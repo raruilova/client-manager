@@ -4,7 +4,7 @@ import useGetClients from "../hooks/useGetClients";
 
 const VierClient = () => {
   const params = useParams();
-  const API = `http://localhost:4000/clients/${params.id}`;
+  const API = `${import.meta.env.VITE_API_URL}/${params.id}`;
   const {clients, loading} = useGetClients(API);
   console.log(clients);
 

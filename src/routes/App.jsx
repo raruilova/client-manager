@@ -8,6 +8,7 @@ import ViewClient from '../pages/ViewClient';
 function App() {
   // al colocar ese path dentro de <Route></Route> se crea una ruta asi, /clientes/nuevo, si creo otra seria /cliente/ruta
   //:id rutas dinamicas para pasarle el id y con eso puedo modificar al usuario
+  //console.log(import.meta.env); //accediendo a las variables de entorno
   return (
     <BrowserRouter>
       <Routes>

@@ -4,7 +4,7 @@ import useGetClients from "../hooks/useGetClients";
 
 const EditClient = () => {
   const params = useParams();
-  const API = `http://localhost:4000/clients/${params.id}`;
+  const API = `${import.meta.env.VITE_API_URL}/${params.id}`;
   const {clients, loading} = useGetClients(API);
   return (<>
     <h1 className="font-black text-4xl text-blue-900">Editar cliente</h1>

@@ -2,7 +2,7 @@ import Client from "../components/Client";
 import useGetClients from "../hooks/useGetClients";
 
 const Home = () => {
-  const API = "http://localhost:4000/clients";
+  const API = import.meta.env.VITE_API_URL;
 
   const {clients, setClients} = useGetClients(API);
   
@@ -10,7 +10,7 @@ const Home = () => {
     const confirmDeleteClient = confirm("¿Estás seguro de eliminar este cliente?"); //devuelve true al pulsar aceptar y false al pulsar cancelar
 
     if (confirmDeleteClient) {
-      const API = `http://localhost:4000/clients/${id}`;
+      const API = `${import.meta.env.VITE_API_URL}/${id}`;
       const response = await fetch(API, {
         method: "DELETE",
       });
