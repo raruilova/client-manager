@@ -15,14 +15,6 @@
       "phone": "3456789",
       "notes": "google",
       "id": 4
-    },
-    {
-      "name": "comida",
-      "company": "deder",
-      "email": "eder@f.com",
-      "phone": "123123",
-      "notes": "dfsdfs",
-      "id": 5
     }
   ]
 }

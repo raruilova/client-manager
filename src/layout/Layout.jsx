@@ -11,9 +11,9 @@ const Layout = () => {
         </h2>
         <nav className="mt-10">
           <Link
-            to="/clientes"
+            to="/"
             className={`${
-              currentUrl == "/clientes"
+              currentUrl == "/"
                 ? "text-blue-300"
                 : "text-white text-2xl block mt-2 hover:text-blue-300"
             } `}
@@ -21,9 +21,9 @@ const Layout = () => {
             Clientes
           </Link>
           <Link
-            to="/clientes/nuevo"
+            to="/nuevo"
             className={`${
-              currentUrl == "/clientes/nuevo"
+              currentUrl == "/nuevo"
                 ? "text-blue-300"
                 : "text-white text-2xl block mt-2 hover:text-blue-300"
             } `}
